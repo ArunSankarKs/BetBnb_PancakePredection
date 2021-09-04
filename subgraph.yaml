@@ -1,0 +1,83 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: PancakePredictionV2
+    network: bsc
+    source:
+      address: "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA"
+      abi: PancakePredictionV2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - BetBear
+        - BetBull
+        - Claim
+        - EndRound
+        - LockRound
+        - NewAdminAddress
+        - NewBufferAndIntervalSeconds
+        - NewMinBetAmount
+        - NewOperatorAddress
+        - NewOracle
+        - NewOracleUpdateAllowance
+        - NewTreasuryFee
+        - OwnershipTransferred
+        - Pause
+        - Paused
+        - RewardsCalculated
+        - StartRound
+        - TokenRecovery
+        - TreasuryClaim
+        - Unpause
+        - Unpaused
+      abis:
+        - name: PancakePredictionV2
+          file: ./abis/PancakePredictionV2.json
+      eventHandlers:
+        - event: BetBear(indexed address,indexed uint256,uint256)
+          handler: handleBetBear
+        - event: BetBull(indexed address,indexed uint256,uint256)
+          handler: handleBetBull
+        - event: Claim(indexed address,indexed uint256,uint256)
+          handler: handleClaim
+        - event: EndRound(indexed uint256,indexed uint256,int256)
+          handler: handleEndRound
+        - event: LockRound(indexed uint256,indexed uint256,int256)
+          handler: handleLockRound
+        - event: NewAdminAddress(address)
+          handler: handleNewAdminAddress
+        - event: NewBufferAndIntervalSeconds(uint256,uint256)
+          handler: handleNewBufferAndIntervalSeconds
+        - event: NewMinBetAmount(indexed uint256,uint256)
+          handler: handleNewMinBetAmount
+        - event: NewOperatorAddress(address)
+          handler: handleNewOperatorAddress
+        - event: NewOracle(address)
+          handler: handleNewOracle
+        - event: NewOracleUpdateAllowance(uint256)
+          handler: handleNewOracleUpdateAllowance
+        - event: NewTreasuryFee(indexed uint256,uint256)
+          handler: handleNewTreasuryFee
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Pause(indexed uint256)
+          handler: handlePause
+        - event: Paused(address)
+          handler: handlePaused
+        - event: RewardsCalculated(indexed uint256,uint256,uint256,uint256)
+          handler: handleRewardsCalculated
+        - event: StartRound(indexed uint256)
+          handler: handleStartRound
+        - event: TokenRecovery(indexed address,uint256)
+          handler: handleTokenRecovery
+        - event: TreasuryClaim(uint256)
+          handler: handleTreasuryClaim
+        - event: Unpause(indexed uint256)
+          handler: handleUnpause
+        - event: Unpaused(address)
+          handler: handleUnpaused
+      file: ./src/mapping.ts
